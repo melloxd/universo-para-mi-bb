@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>El universo de Margarita ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --tinta: #07051a;
+  --rosa: #ff7aa8;
+  --oro: #ffd27a;
+  --lila: #cdb0ff;
+  --niebla: #e9e2ff;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  height: 100%; overflow: hidden; background: var(--tinta); color: #fff;
+  font-family: 'Quicksand', system-ui, sans-serif;
+}
+button { font: inherit; color: inherit; }
+button:focus-visible { outline: 2px solid var(--oro); outline-offset: 4px; }
+.hidden { display: none !important; }
+
+#sky { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; }
+.nebula {
+  position: fixed; inset: -20%; z-index: 1; pointer-events: none;
+  background:
+    radial-gradient(40% 30% at 25% 30%, rgba(255, 110, 170, .11), transparent 70%),
+    radial-gradient(35% 35% at 75% 65%, rgba(140, 100, 255, .13), transparent 70%),
+    radial-gradient(30% 25% at 60% 18%, rgba(255, 210, 122, .06), transparent 70%);
+  filter: blur(30px);
+  animation: deriva 40s ease-in-out infinite alternate;
+}
+@keyframes deriva { to { transform: translate(4%, -3%) rotate(6deg) scale(1.08); } }
+
+.intro {
+  position: fixed; inset: 0; z-index: 20; overflow: hidden;
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+  background: radial-gradient(circle at 50% 45%, rgba(70, 35, 120, .5), rgba(7, 5, 26, .92) 70%);
+  transition: opacity 1.5s ease;
+}
+.intro.saliendo { opacity: 0; pointer-events: none; }
+.intro-card {
+  position: relative; z-index: 1; width: 100%; max-width: 440px; text-align: center;
+  padding: 44px 30px 32px; border-radius: 30px;
+  background: linear-gradient(165deg, rgba(60, 34, 110, .55), rgba(22, 13, 52, .72));
+  border: 1px solid rgba(255, 210, 240, .22);
+  box-shadow: 0 0 70px rgba(255, 120, 190, .18), inset 0 0 40px rgba(255, 255, 255, .03);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  animation: entraTarjeta 1.8s cubic-bezier(.2, .9, .3, 1) both;
+  transition: transform 1.5s ease, filter 1.5s ease;
+}
+.intro.saliendo .intro-card { transform: scale(1.3); filter: blur(10px); }
+@keyframes entraTarjeta { from { opacity: 0; transform: translateY(34px) scale(.9); filter: blur(12px); } }
+.intro-icon {
+  font-size: 1.6rem; letter-spacing: .4em; color: var(--oro);
+  text-shadow: 0 0 16px rgba(255, 200, 120, .8);
+  animation: titila 3s ease-in-out infinite;
+}
+@keyframes titila { 50% { opacity: .55; text-shadow: 0 0 30px rgba(255, 140, 200, .9); } }
+.intro h1 {
+  font-family: 'Dancing Script', cursive; font-weight: 700;
+  font-size: clamp(2.4rem, 9vw, 3.6rem); line-height: 1.1; margin: 14px 0 12px;
+  background: linear-gradient(90deg, #ffe3f1, #ffd27a, #cdb0ff, #ffe3f1);
+  background-size: 300% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: brilloTexto 7s linear infinite;
+  filter: drop-shadow(0 0 14px rgba(255, 140, 200, .5));
+}
+@keyframes brilloTexto { to { background-position: 300% 0; } }
+.intro p { color: #ddd3ff; line-height: 1.6; font-size: 1.05rem; max-width: 30ch; margin: 0 auto; }
+#start {
+  margin-top: 28px; padding: 14px 30px; border-radius: 999px; cursor: pointer; font-weight: 700;
+  border: 1px solid rgba(255, 210, 240, .6); background: rgba(255, 150, 210, .14);
+  box-shadow: 0 0 24px rgba(255, 140, 200, .35);
+  animation: latidoBoton 2.6s ease-in-out infinite; transition: background .3s;
+}
+#start:hover { background: rgba(255, 150, 210, .26); }
+@keyframes latidoBoton { 50% { box-shadow: 0 0 44px rgba(255, 160, 220, .75); transform: scale(1.03); } }
+.intro small { display: block; margin-top: 18px; color: rgba(220, 210, 255, .6); font-size: .82rem; }
+.chispa {
+  position: absolute; bottom: -10px; width: 3px; height: 3px; border-radius: 50%; background: #fff;
+  box-shadow: 0 0 6px #fff, 0 0 12px #f9c; opacity: 0; animation: flotar linear infinite;
+}
+@keyframes flotar { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(-115vh); opacity: 0; } }
+
+main { position: fixed; inset: 0; z-index: 3; pointer-events: none; animation: aparece 2.2s ease both; }
+@keyframes aparece { from { opacity: 0; } }
+#heart {
+  position: fixed; inset: 0; width: 100%; height: 100%; z-index: 1;
+  pointer-events: auto; touch-action: none; cursor: grab;
+}
+#heart.arrastrando { cursor: grabbing; }
+
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 2;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: calc(14px + env(safe-area-inset-top, 0px)) 18px 0;
+}
+.marca span { display: block; font-family: 'Dancing Script', cursive; font-size: 1.45rem; color: #ffe9f4; text-shadow: 0 0 14px rgba(255, 140, 200, .55); }
+.marca small { display: block; margin-top: 2px; font-size: .82rem; color: var(--oro); opacity: .85; }
+#help {
+  pointer-events: auto; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-weight: 700;
+  border: 1px solid rgba(255, 210, 122, .45); background: rgba(30, 18, 64, .6);
+  box-shadow: 0 0 16px rgba(255, 210, 122, .2); transition: background .3s;
+}
+#help:hover { background: rgba(255, 210, 122, .18); }
+
+.hint {
+  position: fixed; z-index: 2; left: 50%; top: calc(78px + env(safe-area-inset-top, 0px));
+  transform: translateX(-50%); width: max-content; max-width: 92vw; text-align: center;
+  padding: 9px 18px; border-radius: 999px; font-size: .88rem; color: var(--niebla);
+  background: rgba(22, 13, 48, .62); border: 1px solid rgba(200, 180, 255, .22);
+  transition: opacity 1.6s;
+}
+.hint.oculta { opacity: 0; }
+
+footer {
+  position: fixed; z-index: 2; left: 0; right: 0; bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  padding: 0 16px; text-align: center; font-size: .85rem; color: rgba(215, 200, 255, .55);
+}
+
+.letter {
+  position: fixed; inset: 0; z-index: 10; pointer-events: auto;
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+  background: rgba(6, 4, 22, .58); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+  opacity: 0; transition: opacity .45s;
+}
+.letter.abierta { opacity: 1; }
+.letter-inner {
+  position: relative; width: 100%; max-width: 440px; max-height: 82vh; overflow-y: auto;
+  padding: 40px 28px 28px; border-radius: 26px; text-align: center;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255, 210, 122, .08), transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(255, 122, 168, .1), transparent 45%),
+    linear-gradient(165deg, rgba(62, 36, 114, .96), rgba(24, 14, 56, .97));
+  border: 1px solid rgba(255, 215, 140, .35);
+  box-shadow: 0 0 60px rgba(255, 180, 120, .2), inset 0 0 30px rgba(255, 255, 255, .04);
+  transform: scale(.75) translateY(40px) rotate(-2deg);
+  transition: transform .65s cubic-bezier(.2, 1.4, .4, 1);
+}
+.letter.abierta .letter-inner { transform: none; }
+#close {
+  position: absolute; top: 10px; right: 12px; width: 38px; height: 38px; border: 0; border-radius: 50%;
+  background: none; font-size: 1.7rem; line-height: 1; color: rgba(255, 230, 190, .8); cursor: pointer;
+}
+.letter-star {
+  display: inline-block; font-size: 2.3rem; color: var(--oro);
+  text-shadow: 0 0 20px #ffb84d; animation: girar 8s linear infinite;
+}
+@keyframes girar { to { transform: rotate(360deg); } }
+#letterTitle {
+  font-family: 'Dancing Script', cursive; font-weight: 700;
+  font-size: clamp(1.8rem, 6vw, 2.3rem); color: #ffe7c2; margin: 8px 0 14px;
+}
+#letterText { font-size: 1.06rem; line-height: 1.75; color: #f1eaff; white-space: pre-line; min-height: 3em; }
+#letterText.escribiendo::after { content: '▍'; color: var(--rosa); animation: parpadeo 1s steps(2) infinite; }
+@keyframes parpadeo { 50% { opacity: 0; } }
+.letter-foot { display: block; margin-top: 22px; font-family: 'Dancing Script', cursive; font-size: 1.3rem; color: var(--rosa); }
+.letter.ayuda .letter-foot { display: none; }
+.letter.ayuda #letterText { text-align: left; font-size: .98rem; }
+
+.toast {
+  position: fixed; z-index: 11; left: 50%; bottom: calc(52px + env(safe-area-inset-bottom, 0px));
+  transform: translate(-50%, 20px); width: max-content; max-width: 90vw; text-align: center;
+  padding: 10px 20px; border-radius: 999px; font-size: .95rem; color: #fff3e0;
+  background: rgba(28, 16, 60, .88); border: 1px solid rgba(255, 210, 122, .35);
+  opacity: 0; pointer-events: none; transition: opacity .4s, transform .4s;
+}
+.toast.visible { opacity: 1; transform: translate(-50%, 0); }
+.toast.secreto { color: #f2e6ff; border-color: rgba(205, 176, 255, .75); box-shadow: 0 0 30px rgba(205, 160, 255, .45); }
+
+@media (prefers-reduced-motion: reduce) {
+  .nebula, .chispa { animation: none; }
+  .chispa { display: none; }
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="nebula"></div>
+
+<section id="intro" class="intro">
+  <div class="intro-card">
+    <div class="intro-icon">✦ ♡ ✦</div>
+    <h1>Un universo para ti</h1>
+    <p>Hay millones de estrellas, pero mi favorita siempre serás tú.</p>
+    <button id="start">Entrar a nuestro universo ✨</button>
+    <small>Un pequeño rincón hecho con amor</small>
+  </div>
+</section>
+
+<main id="world" class="hidden">
+  <canvas id="heart" aria-label="Corazón tridimensional interactivo"></canvas>
+
+  <header>
+    <div class="marca">
+      <span>✧ El universo de Margarita</span>
+      <small id="dias"></small>
+    </div>
+    <button id="help" aria-label="Instrucciones">?</button>
+  </header>
+
+  <div id="hint" class="hint">Arrastra el corazón para girarlo · Toca sus estrellas para leer cartas</div>
+
+  <div id="letter" class="letter hidden" role="dialog" aria-modal="true" aria-labelledby="letterTitle">
+    <div class="letter-inner">
+      <button id="close" aria-label="Cerrar">×</button>
+      <div class="letter-star">✧</div>
+      <h2 id="letterTitle"></h2>
+      <p id="letterText"></p>
+      <span class="letter-foot">Con todo mi corazón ♡</span>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <footer>Las constelaciones guardan secretos. Mira el cielo con atención. ✦</footer>
+</main>
+
+<script>
+const CARTAS = [
+  { titulo: "Mi estrella favorita", texto: "De todas las estrellas de este cielo, tú eres la que más brilla. Y no lo digo por decir: lo veo cada vez que sonríes." },
+  { titulo: "Gracias", texto: "Gracias por elegirme, por tenerme paciencia y por hacer que los días normales se sientan especiales." },
+  { titulo: "Tu risa", texto: "Tu risa es mi sonido favorito del universo. Si pudiera, la guardaría en un frasco para escucharla siempre." },
+  { titulo: "Mi lugar seguro", texto: "Contigo puedo ser yo mismo. Eres mi calma cuando todo está revuelto." },
+  { titulo: "Lo que me encanta", texto: "Me encanta cómo me miras, cómo te emocionas con cosas pequeñas y cómo haces todo más bonito sin darte cuenta." },
+  { titulo: "Nuestro día", texto: "El 1 de octubre empezó lo más bonito de mi vida. Y apenas vamos empezando." },
+  { titulo: "Una promesa", texto: "Te prometo seguir buscando maneras de hacerte sonreír, aunque tenga que traer a un unicorno desde otro reino." },
+  { titulo: "Te amo", texto: "Te amo más de lo que caben estrellas aquí. Y aquí caben muchísimas ✨" },
+];
+
+const CONFIG = {
+
+  fechaInicio: "2026-01-10",
+
+  cartaFinal: {
+    titulo: "Encontraste todas",
+    texto: "Leíste todas mis estrellas… pero la más bonita de este universo sigues siendo tú, Margarita 💛",
+  },
+
+  fecha: "1.10.2026",
+  textoCartel: ["me dicen pato pero soy", "horrintorinco", "que chido pues"],
+  textoSecreto: ["Vesh que si eresh", "lista mi niña?"],
+
+  nombres: {
+    cabra: "✦ MEHHHHH",
+    osito: "✦ BB: HOLIII MAMI",
+    osote: "✦ Paquito: zzzzz (en invernacion) ",
+    orni: "✦ pato",
+    fecha: "♡ Nuestro primer día ♡",
+    secreto: "✧ ¡Encontraste una constelación secreta! ✧",
+    unicornio: "✦HOLA MAMI MIRA SOY COMO LA PINCHECHA LUNA!!!!✦"
+  },
+
+  deseos: [
+    "Pide un deseo ✨",
+    "Atrapaste una estrella fugaz, pide algo bonito",
+    "Ese deseo ya va en camino 💫",
+  ],
+
+  esperaMin: 15,
+  esperaMax: 35,
+  duracion: 11,
+  probSecreta: 0.02,
+  velocidadEscritura: 28,
+
+  modoPrueba: false,
+};
+
+const $ = id => document.getElementById(id);
+const rnd = (a, b) => a + Math.random() * (b - a);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const easeOut = t => 1 - Math.pow(1 - t, 3);
+const GA = Math.PI * (3 - Math.sqrt(5));
+const FUENTE_TEXTO = "'Quicksand', 'Arial Rounded MT Bold', Arial, sans-serif";
+
+const sky = $('sky'), sctx = sky.getContext('2d');
+const hc = $('heart'), hctx = hc.getContext('2d');
+let W, H, R, DPR, fondoGrad;
+
+const guardar = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const cargar = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v ?? d; } catch (e) { return d; } };
+const leidas = new Set(cargar('universo_leidas', []).filter(i => i < CARTAS.length));
+const descubiertas = new Set(cargar('universo_const', []));
+let finalMostrado = cargar('universo_final', false);
+
+function crearSprite(col) {
+  const s = 64, c = document.createElement('canvas');
+  c.width = c.height = s;
+  const g = c.getContext('2d');
+  const gr = g.createRadialGradient(s / 2, s / 2, 0, s / 2, s / 2, s / 2);
+  gr.addColorStop(0, 'rgba(255,255,255,1)');
+  gr.addColorStop(0.12, `rgba(${col},1)`);
+  gr.addColorStop(0.35, `rgba(${col},.35)`);
+  gr.addColorStop(1, `rgba(${col},0)`);
+  g.fillStyle = gr; g.fillRect(0, 0, s, s);
+  return c;
+}
+const SPR = {
+  blanco: crearSprite('195,218,255'),
+  oro: crearSprite('255,205,110'),
+  rosa: crearSprite('255,115,165'),
+  lila: crearSprite('205,160,255'),
+};
+function brillo(c, spr, x, y, size, alpha) {
+  if (alpha <= 0 || size <= 0) return;
+  c.globalAlpha = Math.min(1, alpha);
+  c.drawImage(spr, x - size, y - size, size * 2, size * 2);
+}
+
+let estrellasFondo = [];
+function resize() {
+  DPR = Math.min(window.devicePixelRatio || 1, 2);
+  W = innerWidth; H = innerHeight;
+  for (const c of [sky, hc]) { c.width = W * DPR; c.height = H * DPR; }
+  sctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  hctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  R = Math.min(W, H) * 0.36;
+  fondoGrad = sctx.createRadialGradient(W / 2, H * 0.45, 0, W / 2, H * 0.45, Math.max(W, H) * 0.8);
+  fondoGrad.addColorStop(0, '#24134a');
+  fondoGrad.addColorStop(0.5, '#120a30');
+  fondoGrad.addColorStop(1, '#05030f');
+  const n = Math.min(650, Math.floor(W * H / 2400));
+  estrellasFondo = Array.from({ length: n }, () => ({
+    x: Math.random() * W, y: Math.random() * H,
+    s: rnd(1.5, 4.5), f: rnd(0.5, 2.5), ph: Math.random() * 6.28,
+    c: Math.random() < 0.12 ? SPR.lila : Math.random() < 0.06 ? SPR.oro : SPR.blanco,
+  }));
+}
+addEventListener('resize', resize);
+resize();
+
+const toastEl = $('toast');
+let toastTimer;
+function aviso(texto, secreto = false, ms = 3200) {
+  toastEl.textContent = texto;
+  toastEl.classList.toggle('secreto', secreto);
+  toastEl.classList.add('visible');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('visible'), ms);
+}
+
+function diasJuntos() {
+  const [a, m, d] = CONFIG.fechaInicio.split('-').map(Number);
+  const hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+  return Math.round((hoy - new Date(a, m - 1, d)) / 86400000);
+}
+function textoDias() {
+  const n = diasJuntos();
+  if (n < 0) return '';
+  if (n === 0) return 'Hoy empezó todo ♡';
+  return n === 1 ? '♡ 1 día juntos' : `♡ ${n} días juntos`;
+}
+$('dias').textContent = textoDias();
+
+let fugaces = [], proximaFugaz = 3000;
+function dibujarFugaces(now) {
+  if (now > proximaFugaz) {
+    const ang = rnd(0.35, 0.7), v = rnd(7, 11);
+    fugaces.push({ x: rnd(-W * 0.1, W * 0.8), y: rnd(-20, H * 0.4), vx: Math.cos(ang) * v, vy: Math.sin(ang) * v, vida: 1 });
+    proximaFugaz = now + rnd(4000, 10000);
+  }
+  for (const f of fugaces) {
+    f.x += f.vx; f.y += f.vy; f.vida -= 0.01;
+    const g = sctx.createLinearGradient(f.x, f.y, f.x - f.vx * 10, f.y - f.vy * 10);
+    g.addColorStop(0, `rgba(255,255,255,${f.vida})`);
+    g.addColorStop(1, 'rgba(255,255,255,0)');
+    sctx.globalAlpha = 1; sctx.strokeStyle = g; sctx.lineWidth = 1.6;
+    sctx.beginPath(); sctx.moveTo(f.x, f.y); sctx.lineTo(f.x - f.vx * 10, f.y - f.vy * 10); sctx.stroke();
+    brillo(sctx, SPR.blanco, f.x, f.y, 7, f.vida);
+  }
+  fugaces = fugaces.filter(f => f.vida > 0 && f.x < W + 100 && f.y < H + 100);
+}
+
+const C = (cx, cy, r, n, ry) => ({
+  p: Array.from({ length: n }, (_, i) => {
+    const a = i / n * Math.PI * 2 - Math.PI / 2;
+    return [cx + Math.cos(a) * r, cy + Math.sin(a) * (ry ?? r)];
+  }), c: true,
+});
+const L = (...p) => ({ p });
+
+const FIGURAS = {
+  cabra: () => ({
+    trazos: [
+      C(50, 52, 26, 12),
+      L([40, 29], [34, 16], [26, 8], [19, 10], [22, 18]),
+      L([60, 29], [66, 16], [74, 8], [81, 10], [78, 18]),
+      L([26, 45], [10, 40], [14, 50], [26, 51]),
+      L([74, 45], [90, 40], [86, 50], [74, 51]),
+      L([43, 76], [46, 87], [50, 97], [54, 87], [57, 76]),
+    ],
+    sueltas: [[41, 48], [59, 48], [50, 61], [46, 64], [54, 64]],
+  }),
+  osito: () => ({
+    trazos: [
+      C(46, 34, 15, 10), C(35, 21, 5, 6), C(57, 21, 5, 6),
+      L([39, 34], [41, 31], [43, 34]), L([49, 34], [51, 31], [53, 34]),
+      C(46, 68, 15, 9, 17),
+      L([59, 60], [69, 50], [74, 39]), C(75, 35, 4, 6),
+      L([33, 62], [27, 74]),
+      L([39, 84], [37, 93]), L([53, 84], [55, 93]),
+      L([82, 30], [87, 25]), L([84, 38], [90, 37]),
+    ],
+    sueltas: [[46, 39], [37, 39], [55, 39]],
+    saluda: true,
+  }),
+  osote: () => ({
+    trazos: [
+      C(36, 36, 19, 12), C(21, 20, 6, 6), C(50, 19, 6, 6),
+      L([26, 36], [29, 39], [32, 36]), L([40, 36], [43, 39], [46, 36]),
+      C(36, 46, 7, 8, 5),
+      L([32, 49], [34, 51], [36, 49], [38, 51], [40, 49]),
+      C(52, 74, 30, 14, 22),
+      L([24, 66], [80, 66]), L([23, 76], [81, 76]), L([27, 86], [77, 86]),
+      L([42, 55], [52, 61], [62, 55]),
+    ],
+    sueltas: [[36, 44]],
+    zzz: true,
+  }),
+  orni: () => ({
+    trazos: [
+      C(26, 66, 9, 9),
+      L([18, 63], [8, 61], [3, 64], [5, 69], [11, 71], [18, 70]),
+      L([21, 61], [30, 58]),
+      C(48, 78, 20, 10, 11),
+      { p: [[68, 80], [80, 76], [86, 82], [80, 88], [68, 84]] },
+      L([40, 88], [38, 95]), L([56, 88], [58, 95]),
+      L([46, 70], [52, 60], [57, 54]),
+      L([58, 58], [58, 32]),
+      { p: [[28, 32], [99, 32], [99, 2], [28, 2]], c: true },
+      L([12, 52], [9, 46]), L([17, 50], [16, 44]),
+    ],
+    sueltas: [[26, 64]],
+    cartel: { x: 63.5, y: 17, w: 71, h: 30 },
+  }),
+  unicornio: () => ({
+    trazos: [
+      { p: [[30, 95], [28, 70], [32, 48], [38, 34], [48, 28], [60, 30], [72, 44], [80, 56], [84, 64], [82, 70], [74, 72], [62, 70], [52, 78], [48, 95]], c: true },
+      L([54, 30], [63, 16], [70, 4], [66, 20], [60, 31]),
+      L([57, 24], [63, 22]), L([60, 17], [65, 15]),
+      L([44, 30], [42, 16], [50, 27]),
+      L([56, 44], [60, 47], [64, 44]),
+      L([42, 26], [30, 30], [24, 40], [30, 46], [20, 54], [26, 62], [16, 70], [24, 78], [18, 88]),
+    ],
+    sueltas: [[78, 62], [68, 54]],
+  }),
+};
+
+function crearFigura(nombre) {
+  const d = FIGURAS[nombre]();
+  const pts = [], segs = [];
+  d.trazos.forEach(t => {
+    const base = pts.length;
+    t.p.forEach(p => pts.push(p));
+    for (let i = 0; i < t.p.length - 1; i++) segs.push([base + i, base + i + 1]);
+    if (t.c) segs.push([base + t.p.length - 1, base]);
+  });
+  const ap = new Array(pts.length).fill(null);
+  segs.forEach((s, k) => s.forEach(i => { if (ap[i] === null) ap[i] = k / segs.length * 0.95; }));
+  (d.sueltas || []).forEach(p => { pts.push(p); ap.push(0.9); });
+  return { pts, segs, ap: ap.map(v => v ?? 0.9), w: 100, h: 100, cartel: d.cartel, zzz: d.zzz, saluda: d.saluda };
+}
+
+function crearTexto(lineas) {
+  const fs = 110, lh = fs * 1.15, pad = 12;
+  const oc = document.createElement('canvas'), o = oc.getContext('2d');
+  o.font = `700 ${fs}px ${FUENTE_TEXTO}`;
+  const w = Math.ceil(Math.max(...lineas.map(l => o.measureText(l).width))) + pad * 2;
+  const h = Math.ceil(lh * lineas.length) + pad * 2;
+  oc.width = w; oc.height = h;
+  o.font = `700 ${fs}px ${FUENTE_TEXTO}`;
+  o.fillStyle = '#fff'; o.textAlign = 'center'; o.textBaseline = 'middle';
+  lineas.forEach((l, i) => o.fillText(l, w / 2, pad + lh * (i + 0.5)));
+  const data = o.getImageData(0, 0, w, h).data;
+  const paso = 8, grid = new Map(), pts = [];
+  for (let y = 0; y < h; y += paso)
+    for (let x = 0; x < w; x += paso)
+      if (data[(y * w + x) * 4 + 3] > 140) {
+        grid.set(x + ',' + y, pts.length);
+        pts.push([x + rnd(-1.3, 1.3), y + rnd(-1.3, 1.3)]);
+      }
+  const segs = [];
+  for (const [k, i] of grid) {
+    const [x, y] = k.split(',').map(Number);
+    const der = grid.get((x + paso) + ',' + y);
+    if (der !== undefined) segs.push([i, der]);
+    const abj = grid.get(x + ',' + (y + paso));
+    if (abj !== undefined && Math.random() < 0.6) segs.push([i, abj]);
+  }
+  segs.sort((a, b) => pts[a[0]][0] - pts[b[0]][0]);
+  return { pts, segs, ap: pts.map(p => p[0] / w * 0.95), w, h, paso, texto: { lineas, fs, lh, pad } };
+}
+
+let constelaciones = [], proximaConst = Infinity, ultimoTipo = '';
+function params() {
+  return CONFIG.modoPrueba
+    ? { min: 2, max: 4, prob: 0.4 }
+    : { min: CONFIG.esperaMin, max: CONFIG.esperaMax, prob: CONFIG.probSecreta };
+}
+
+function lanzarConstelacion(now) {
+  let tipo;
+  if (Math.random() < params().prob) tipo = 'secreto';
+  else {
+    const ops = ['cabra', 'osito', 'osote', 'orni', 'fecha', "unicornio"].filter(o => o !== ultimoTipo);
+    tipo = ops[Math.floor(Math.random() * ops.length)];
+  }
+  ultimoTipo = tipo;
+
+  let base, spr = SPR.blanco, color = '175,205,255';
+  if (tipo === 'fecha') { base = crearTexto([CONFIG.fecha]); spr = SPR.oro; color = '255,212,140'; }
+  else if (tipo === 'secreto') { base = crearTexto(CONFIG.textoSecreto); spr = SPR.lila; color = '215,175,255'; }
+  else if (tipo === 'unicornio') { base = crearFigura('unicornio'); spr = SPR.rosa; color = '255,170,210'; }
+  else base = crearFigura(tipo);
+
+  let s, ox, oy;
+  const arriba = 80, abajo = 70;
+  if (base.texto) {
+    const anchoMax = tipo === 'secreto' ? W * 0.9 : Math.min(W * 0.7, 560);
+    const altoMax = H * (tipo === 'secreto' ? 0.24 : 0.16);
+    s = Math.min(anchoMax / base.w, altoMax / base.h);
+    ox = W / 2 - base.w * s / 2;
+    oy = Math.random() < 0.5 ? arriba + 30 : H - base.h * s - abajo - 20;
+  } else {
+    const S = clamp(Math.min(W, H) * 0.3, 130, 320);
+    s = S / 100;
+    const [fx, fy] = [[0, 0], [1, 0], [0, 1], [1, 1]][Math.floor(Math.random() * 4)];
+    ox = fx ? W - S - rnd(W * 0.03, W * 0.08) : rnd(W * 0.03, W * 0.08);
+    oy = fy ? H - S - abajo - rnd(0, H * 0.05) : arriba + rnd(10, H * 0.05);
+  }
+  constelaciones.push({
+    ...base, tipo, s, ox, oy, t0: now, spr, color, tocada: 0,
+    tin: base.texto ? 3.6 : 3,
+    tamEstrella: base.texto ? Math.max(3, base.paso * s * 0.9) : 7,
+    grosor: base.texto ? 0.8 : 1.2,
+  });
+}
+
+function dibujarConstelacion(c, now) {
+  const t = (now - c.t0) / 1000, total = CONFIG.duracion;
+  if (t > total) { c.muerta = true; return; }
+  const alfa = t < 0.6 ? t / 0.6 : t > total - 2 ? Math.max(0, (total - t) / 2) : 1;
+  const prog = Math.min(1, t / c.tin);
+  const extra = c.tocada ? Math.max(0, 1 - (now - c.tocada) / 1800) : 0;
+  const tt = now / 1000;
+
+  const saludo = c.saluda ? Math.sin(tt * 5) * 4 : 0;
+  const P = i => {
+    let [x, y] = c.pts[i];
+    if (c.saluda && x > 64 && y < 52) { x += saludo * ((52 - y) / 20); }
+    return [c.ox + x * c.s, c.oy + y * c.s];
+  };
+
+  if (c.texto) {
+    sctx.save();
+    sctx.globalAlpha = alfa * (0.13 + extra * 0.25) * prog;
+    sctx.font = `700 ${c.texto.fs * c.s}px ${FUENTE_TEXTO}`;
+    sctx.textAlign = 'center'; sctx.textBaseline = 'middle';
+    sctx.fillStyle = `rgb(${c.color})`;
+    sctx.shadowColor = `rgb(${c.color})`; sctx.shadowBlur = 18;
+    c.texto.lineas.forEach((l, i) =>
+      sctx.fillText(l, c.ox + c.w / 2 * c.s, c.oy + (c.texto.pad + c.texto.lh * (i + 0.5)) * c.s));
+    sctx.restore();
+  }
+
+  const n = c.segs.length, corte = prog * n;
+  sctx.globalAlpha = alfa * Math.min(1, 0.6 + extra * 0.4);
+  sctx.strokeStyle = `rgba(${c.color},.75)`;
+  sctx.lineWidth = c.grosor * (1 + extra);
+  sctx.beginPath();
+  for (let k = 0; k < n && k < corte; k++) {
+    const [i, j] = c.segs[k];
+    const a = P(i), b = P(j), f = Math.min(1, corte - k);
+    sctx.moveTo(a[0], a[1]);
+    sctx.lineTo(a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f);
+  }
+  sctx.stroke();
+
+  for (let i = 0; i < c.pts.length; i++) {
+    const ap = clamp((prog - c.ap[i]) * 8, 0, 1);
+    if (!ap) continue;
+    const [x, y] = P(i);
+    const tw = 0.75 + 0.25 * Math.sin(tt * 3 + i * 1.7);
+    brillo(sctx, c.spr, x, y, c.tamEstrella * tw * (0.6 + 0.4 * ap) * (1 + extra * 0.6), alfa * ap);
+  }
+
+  const a2 = t > c.tin ? Math.min(1, (t - c.tin) / 1.2) * alfa : 0;
+
+  if (c.zzz && a2 > 0) {
+    sctx.save();
+    sctx.textAlign = 'center'; sctx.fillStyle = '#dfe8ff';
+    sctx.shadowColor = 'rgba(180,200,255,.9)'; sctx.shadowBlur = 8;
+    for (let k = 0; k < 3; k++) {
+      const fase = ((tt * 0.35 + k / 3) % 1);
+      sctx.globalAlpha = a2 * Math.sin(fase * Math.PI);
+      sctx.font = `700 ${(8 + k * 3 + fase * 6) * c.s}px ${FUENTE_TEXTO}`;
+      sctx.fillText('z', c.ox + (66 + fase * 18 + k * 3) * c.s, c.oy + (26 - fase * 22) * c.s);
+    }
+    sctx.restore();
+  }
+
+  if (c.cartel && a2 > 0) {
+    const cw = c.cartel.w * c.s, ch = c.cartel.h * c.s;
+    const lineas = CONFIG.textoCartel;
+    sctx.save();
+    sctx.font = `700 10px 'Dancing Script', cursive`;
+    const maxW = Math.max(...lineas.map(l => sctx.measureText(l).width));
+    const fs = Math.min(10 * (cw * 0.88) / maxW, (ch * 0.85) / (lineas.length * 1.2));
+    sctx.font = `700 ${fs}px 'Dancing Script', cursive`;
+    sctx.textAlign = 'center'; sctx.textBaseline = 'middle';
+    sctx.globalAlpha = a2; sctx.fillStyle = '#fff1cc';
+    sctx.shadowColor = 'rgba(255,210,140,.9)'; sctx.shadowBlur = 10;
+    const cx = c.ox + c.cartel.x * c.s, cy = c.oy + c.cartel.y * c.s;
+    lineas.forEach((l, i) => sctx.fillText(l, cx, cy + (i - (lineas.length - 1) / 2) * fs * 1.2));
+    sctx.restore();
+  }
+}
+
+function gestionarConstelaciones(now) {
+  constelaciones = constelaciones.filter(c => !c.muerta);
+  if (now >= proximaConst && constelaciones.length === 0) {
+    lanzarConstelacion(now);
+    const p = params();
+    proximaConst = now + (CONFIG.duracion + rnd(p.min, p.max)) * 1000;
+  }
+  constelaciones.forEach(c => dibujarConstelacion(c, now));
+}
+
+const CAPAS = 11, NPTS = 40, K = 0.034;
+let malla = [], polvo = [], doradas = [], anillos = [];
+let rotX = 0.15, rotY = 0, velX = 0, velY = 0.004;
+let cY = 1, sY = 0, cX = 1, sX = 0;
+const CAM = 3.2;
+
+function conInicio(o) {
+  o.sx = Math.random();
+  o.sy = Math.random() < 0.5 ? rnd(-0.2, 0.1) : rnd(0.9, 1.2);
+  o.retraso = Math.random() * 0.35;
+  o.ph = Math.random() * 6.28;
+  return o;
+}
+function puntoCorazon(t, f, z) {
+  const hx = 16 * Math.pow(Math.sin(t), 3);
+  const hy = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+  return { x: hx * K * f, y: -hy * K * f + 0.08, z };
+}
+function puntoAnillo(an, a) {
+  const x = Math.cos(a) * an.rad, z = Math.sin(a) * an.rad;
+  const y1 = -z * Math.sin(an.tx), z1 = z * Math.cos(an.tx);
+  return { x: x * Math.cos(an.tz) - y1 * Math.sin(an.tz), y: x * Math.sin(an.tz) + y1 * Math.cos(an.tz), z: z1 };
+}
+function crearCorazon() {
+  for (let li = 0; li < CAPAS; li++) {
+    const z = -0.44 + li / (CAPAS - 1) * 0.88;
+    const f = Math.sqrt(Math.max(0.04, 1 - (z / 0.48) ** 2));
+    const fila = [];
+    for (let i = 0; i < NPTS; i++) fila.push(conInicio({ ...puntoCorazon(i / NPTS * Math.PI * 2, f, z), tam: rnd(0.7, 1.3) }));
+    malla.push(fila);
+  }
+  for (let i = 0; i < 150; i++) {
+    const f = Math.sqrt(Math.random()) * 0.85;
+    polvo.push(conInicio({ ...puntoCorazon(Math.random() * Math.PI * 2, f, rnd(-0.35, 0.35) * f), tam: rnd(0.5, 1.2) }));
+  }
+  CARTAS.forEach((_, i) => {
+    const li = 1 + Math.round(((i * 0.618) % 1) * (CAPAS - 3));
+    const z = -0.44 + li / (CAPAS - 1) * 0.88;
+    const f = Math.sqrt(Math.max(0.04, 1 - (z / 0.48) ** 2)) * 1.06;
+    doradas.push(conInicio({ ...puntoCorazon(i / CARTAS.length * Math.PI * 2 + 0.3, f, z * 1.06), i }));
+  });
+  anillos = [
+    { rad: 1.32, tx: 0.15, tz: 0.1, n: 110, luna: 0, vel: 0.006 },
+    { rad: 1.22, tx: 1.15, tz: 0.4, n: 100, luna: 2, vel: -0.008 },
+    { rad: 1.42, tx: -0.95, tz: -0.6, n: 120, luna: 4, vel: 0.005 },
+  ];
+  anillos.forEach(an => { an.pts = Array.from({ length: an.n }, (_, i) => puntoAnillo(an, i / an.n * Math.PI * 2)); });
+}
+crearCorazon();
+
+function proyectar(x, y, z) {
+  const x1 = x * cY + z * sY, z1 = -x * sY + z * cY;
+  const y1 = y * cX - z1 * sX, z2 = y * sX + z1 * cX;
+  const k = CAM / (CAM - z2);
+  return { X: W / 2 + x1 * R * k, Y: H / 2 + y1 * R * k, z: z2, k };
+}
+
+let fase = 'intro', progForm = 0, tForm = 0, arrastrando = false, latidoExtra = 0;
+
+function dibujarCorazon(t) {
+  if (!arrastrando) {
+    velY += (0.004 - velY) * 0.02;
+    velX *= 0.94;
+    rotY += velY; rotX += velX;
+    rotX += (0.15 - rotX) * 0.003;
+  }
+  rotX = clamp(rotX, -1.3, 1.3);
+  cY = Math.cos(rotY); sY = Math.sin(rotY); cX = Math.cos(rotX); sX = Math.sin(rotX);
+
+  const fp = progForm;
+  const mover = (o, q) => {
+    const e = easeOut(clamp((fp - o.retraso) / 0.65, 0, 1));
+    return { X: o.sx * W + (q.X - o.sx * W) * e, Y: o.sy * H + (q.Y - o.sy * H) * e, e };
+  };
+  latidoExtra *= 0.95;
+  const lat = 1 + latidoExtra
+    + 0.07 * Math.pow(Math.max(0, Math.sin(t * 2.4)), 10)
+    + 0.04 * Math.pow(Math.max(0, Math.sin(t * 2.4 - 0.5)), 10);
+
+  hctx.globalAlpha = fp;
+  const halo = hctx.createRadialGradient(W / 2, H / 2, R * 0.1, W / 2, H / 2, R * 1.7);
+  halo.addColorStop(0, `rgba(255,110,170,${0.14 + (lat - 1) * 1.2})`);
+  halo.addColorStop(0.5, 'rgba(140,100,255,.07)');
+  halo.addColorStop(1, 'rgba(0,0,0,0)');
+  hctx.fillStyle = halo;
+  hctx.fillRect(W / 2 - R * 1.7, H / 2 - R * 1.7, R * 3.4, R * 3.4);
+
+  hctx.lineWidth = 1; hctx.strokeStyle = 'rgb(200,180,255)';
+  const items = [];
+  for (const an of anillos) {
+    const pr = an.pts.map(p => proyectar(p.x, p.y, p.z));
+    for (let i = 0; i < pr.length; i++) {
+      const a = pr[i], b = pr[(i + 1) % pr.length];
+      hctx.globalAlpha = fp * (0.04 + 0.26 * ((a.z + b.z) / 2 + 1.4) / 2.8);
+      hctx.beginPath(); hctx.moveTo(a.X, a.Y); hctx.lineTo(b.X, b.Y); hctx.stroke();
+    }
+    an.luna += an.vel;
+    const lp = puntoAnillo(an, an.luna), q = proyectar(lp.x, lp.y, lp.z);
+    items.push({ X: q.X, Y: q.Y, e: fp, z: q.z, k: q.k, tipo: 3 });
+  }
+
+  for (const fila of malla) for (const p of fila) {
+    const q = proyectar(p.x * lat, p.y * lat, p.z * lat), m = mover(p, q);
+    p.q = { ...m, z: q.z, k: q.k };
+    items.push({ ...p.q, tipo: 0, o: p });
+  }
+  hctx.lineWidth = 0.8; hctx.strokeStyle = 'rgb(255,130,180)';
+  const linea = (a, b) => {
+    hctx.globalAlpha = Math.min(a.e, b.e) * (0.04 + 0.22 * ((a.z + b.z) / 2 + 0.6) / 1.2);
+    hctx.beginPath(); hctx.moveTo(a.X, a.Y); hctx.lineTo(b.X, b.Y); hctx.stroke();
+  };
+  malla.forEach(fila => fila.forEach((p, i) => linea(p.q, fila[(i + 1) % NPTS].q)));
+  for (let i = 0; i < NPTS; i += 5)
+    for (let li = 0; li < CAPAS - 1; li++) linea(malla[li][i].q, malla[li + 1][i].q);
+
+  for (const p of polvo) {
+    const q = proyectar(p.x * lat, p.y * lat, p.z * lat), m = mover(p, q);
+    items.push({ ...m, z: q.z, k: q.k, tipo: 1, o: p });
+  }
+  for (const d of doradas) {
+    const q = proyectar(d.x * lat, d.y * lat, d.z * lat), m = mover(d, q);
+    d.X = m.X; d.Y = m.Y; d.z2 = q.z;
+    items.push({ ...m, z: q.z, k: q.k, tipo: 2, o: d });
+  }
+  items.sort((a, b) => a.z - b.z);
+
+  for (const it of items) {
+    const prof = clamp((it.z + 0.6) / 1.2, 0, 1);
+    if (it.tipo === 0) {
+      const tw = 0.75 + 0.25 * Math.sin(t * 2.5 + it.o.ph);
+      brillo(hctx, prof > 0.55 ? SPR.rosa : SPR.blanco, it.X, it.Y, 5 * it.o.tam * it.k * lat, it.e * (0.2 + 0.8 * prof) * tw);
+    } else if (it.tipo === 1) {
+      const tw = 0.5 + 0.5 * Math.sin(t * 1.8 + it.o.ph);
+      brillo(hctx, SPR.rosa, it.X, it.Y, 4 * it.o.tam * it.k, it.e * 0.45 * tw);
+    } else if (it.tipo === 3) {
+      brillo(hctx, SPR.lila, it.X, it.Y, 9 * it.k, it.e * (0.3 + 0.7 * prof));
+    } else {
+      const d = it.o, leida = leidas.has(d.i);
+      const pulso = 1 + 0.25 * Math.sin(t * 3 + d.i);
+      const tam = (leida ? 7 : 11) * it.k * pulso;
+      const a = it.e * (it.z > -0.1 ? 1 : 0.25);
+      brillo(hctx, leida ? SPR.rosa : SPR.oro, it.X, it.Y, tam * 2.3, a);
+      hctx.globalAlpha = a * 0.85;
+      hctx.strokeStyle = leida ? 'rgb(255,175,210)' : 'rgb(255,226,150)';
+      hctx.lineWidth = 1.2;
+      const largo = tam * 1.7, ang = t * 0.6 + d.i;
+      hctx.beginPath();
+      for (let j = 0; j < 4; j++) {
+        const an = ang + j * Math.PI / 2;
+        hctx.moveTo(it.X, it.Y);
+        hctx.lineTo(it.X + Math.cos(an) * largo, it.Y + Math.sin(an) * largo);
+      }
+      hctx.stroke();
+    }
+  }
+}
+
+let particulas = [];
+function explosion(x, y, n, sprs, opts = {}) {
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * 6.28, v = rnd(opts.vmin ?? 1, opts.vmax ?? 6);
+    particulas.push({
+      x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - (opts.subir ?? 0), vida: 1,
+      dec: rnd(0.01, 0.025), tam: rnd(opts.tmin ?? 3, opts.tmax ?? 8),
+      spr: sprs[i % sprs.length], corazon: opts.corazones,
+    });
+  }
+}
+function dibujarParticulas() {
+  for (const p of particulas) {
+    p.x += p.vx; p.y += p.vy; p.vx *= 0.96; p.vy *= 0.96;
+    p.vy += p.corazon ? -0.02 : 0.03;
+    p.vida -= p.dec;
+    if (p.corazon) {
+      hctx.globalAlpha = Math.max(0, p.vida);
+      hctx.fillStyle = '#ff8fb8';
+      hctx.font = `${p.tam * 3}px serif`;
+      hctx.textAlign = 'center'; hctx.textBaseline = 'middle';
+      hctx.fillText('♥', p.x, p.y);
+    } else brillo(hctx, p.spr, p.x, p.y, p.tam, p.vida);
+  }
+  particulas = particulas.filter(p => p.vida > 0);
+}
+
+function bucle(now) {
+  const t = now / 1000;
+  sctx.globalAlpha = 1;
+  sctx.fillStyle = fondoGrad;
+  sctx.fillRect(0, 0, W, H);
+  for (const e of estrellasFondo) brillo(sctx, e.c, e.x, e.y, e.s, 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(t * e.f + e.ph)));
+  dibujarFugaces(now);
+  if (fase !== 'intro') gestionarConstelaciones(now);
+
+  hctx.clearRect(0, 0, W, H);
+  if (fase === 'formando') {
+    progForm = clamp((now - tForm) / 2800, 0, 1);
+    if (progForm >= 1) fase = 'listo';
+  }
+  if (fase !== 'intro') dibujarCorazon(t);
+  dibujarParticulas();
+  requestAnimationFrame(bucle);
+}
+requestAnimationFrame(bucle);
+
+const intro = $('intro'), world = $('world');
+for (let i = 0; i < 34; i++) {
+  const c = document.createElement('div'); c.className = 'chispa';
+  c.style.left = Math.random() * 100 + '%';
+  c.style.animationDuration = rnd(6, 13) + 's';
+  c.style.animationDelay = rnd(0, 8) + 's';
+  intro.appendChild(c);
+}
+$('start').addEventListener('click', () => {
+  intro.classList.add('saliendo');
+  world.classList.remove('hidden');
+  const now = performance.now();
+  fase = 'formando'; tForm = now;
+  proximaConst = now + (CONFIG.modoPrueba ? 3000 : 8000);
+  explosion(W / 2, H / 2, 110, [SPR.rosa, SPR.oro, SPR.blanco, SPR.lila], { vmax: 9 });
+  setTimeout(() => intro.classList.add('hidden'), 1600);
+  setTimeout(() => $('hint').classList.add('oculta'), 12000);
+});
+
+let ultX = 0, ultY = 0, movido = 0, punteroActivo = null, ultimoToque = 0;
+hc.addEventListener('pointerdown', e => {
+  if (fase === 'intro') return;
+  punteroActivo = e.pointerId; hc.setPointerCapture(e.pointerId);
+  arrastrando = true; movido = 0; ultX = e.clientX; ultY = e.clientY;
+  hc.classList.add('arrastrando');
+});
+hc.addEventListener('pointermove', e => {
+  if (arrastrando && e.pointerId === punteroActivo) {
+    const dx = e.clientX - ultX, dy = e.clientY - ultY;
+    movido += Math.abs(dx) + Math.abs(dy);
+    rotY += dx * 0.006; rotX -= dy * 0.006;
+    velY = dx * 0.006; velX = -dy * 0.006;
+    ultX = e.clientX; ultY = e.clientY;
+  } else if (fase === 'listo') {
+    hc.style.cursor = buscarDorada(e.clientX, e.clientY) >= 0 || buscarConstelacion(e.clientX, e.clientY) ? 'pointer' : '';
+    if (e.pointerType === 'mouse' && Math.random() < 0.35)
+      explosion(e.clientX, e.clientY, 1, [SPR.blanco, SPR.rosa, SPR.lila], { vmin: 0.2, vmax: 0.8, tmin: 2, tmax: 4 });
+  }
+});
+function soltar(e) {
+  if (!arrastrando || e.pointerId !== punteroActivo) return;
+  arrastrando = false; punteroActivo = null;
+  hc.classList.remove('arrastrando');
+  if (movido < 8) tocar(e.clientX, e.clientY);
+}
+hc.addEventListener('pointerup', soltar);
+hc.addEventListener('pointercancel', soltar);
+
+function tocar(x, y) {
+  if (fase !== 'listo' || !letter.classList.contains('hidden')) return;
+
+  const i = buscarDorada(x, y);
+  if (i >= 0) return abrirCartaEstrella(i);
+
+  const f = fugaces.find(f => Math.hypot(f.x - x, f.y - y) < 45);
+  if (f) {
+    f.vida = 0;
+    explosion(f.x, f.y, 40, [SPR.oro, SPR.blanco]);
+    return aviso(CONFIG.deseos[Math.floor(Math.random() * CONFIG.deseos.length)]);
+  }
+
+  const c = buscarConstelacion(x, y);
+  if (c) {
+    c.tocada = performance.now();
+    const nueva = !descubiertas.has(c.tipo);
+    descubiertas.add(c.tipo); guardar('universo_const', [...descubiertas]);
+    explosion(x, y, 30, [c.spr, SPR.blanco]);
+    return aviso(CONFIG.nombres[c.tipo] + (nueva ? `  (${descubiertas.size}/7)` : ''), c.tipo === 'secreto', 4000);
+  }
+
+  const ahora = performance.now();
+  const enCorazon = Math.hypot(x - W / 2, y - H / 2) < R * 0.7;
+  if (enCorazon && ahora - ultimoToque < 350) {
+    latidoExtra = 0.18;
+    explosion(W / 2, H / 2, 26, [SPR.rosa], { corazones: true, vmin: 2, vmax: 7, tmin: 4, tmax: 9, subir: 1 });
+    ultimoToque = 0;
+  } else {
+    ultimoToque = enCorazon ? ahora : 0;
+    explosion(x, y, 10, [SPR.blanco, SPR.lila, SPR.rosa], { vmax: 3, tmin: 2, tmax: 5 });
+  }
+}
+
+function buscarDorada(x, y) {
+  if (fase !== 'listo') return -1;
+  let mejor = -1, md = 28;
+  doradas.forEach((d, i) => {
+    if (d.z2 < -0.1) return;
+    const dist = Math.hypot(d.X - x, d.Y - y);
+    if (dist < md) { md = dist; mejor = i; }
+  });
+  return mejor;
+}
+function buscarConstelacion(x, y) {
+  const now = performance.now();
+  return constelaciones.find(c => {
+    if (c.muerta || (now - c.t0) / 1000 < c.tin * 0.5) return false;
+    const pad = 12;
+    return x > c.ox - pad && x < c.ox + c.w * c.s + pad && y > c.oy - pad && y < c.oy + c.h * c.s + pad;
+  });
+}
+
+const letter = $('letter'), lTitulo = $('letterTitle'), lTexto = $('letterText');
+let escribiendo = null;
+
+function abrirCarta(titulo, texto, { escribir = true, ayuda = false } = {}) {
+  clearInterval(escribiendo);
+  letter.classList.toggle('ayuda', ayuda);
+  lTitulo.textContent = titulo;
+  lTexto.dataset.completo = texto;
+  letter.classList.remove('hidden');
+  requestAnimationFrame(() => requestAnimationFrame(() => letter.classList.add('abierta')));
+  if (escribir) {
+    lTexto.textContent = '';
+    lTexto.classList.add('escribiendo');
+    const letras = [...texto];
+    let i = 0;
+    escribiendo = setInterval(() => {
+      lTexto.textContent += letras[i++];
+      if (i >= letras.length) { clearInterval(escribiendo); lTexto.classList.remove('escribiendo'); }
+    }, CONFIG.velocidadEscritura);
+  } else {
+    lTexto.textContent = texto;
+    lTexto.classList.remove('escribiendo');
+  }
+  $('close').focus();
+}
+function abrirCartaEstrella(i) {
+  const nueva = !leidas.has(i);
+  leidas.add(i); guardar('universo_leidas', [...leidas]);
+  latidoExtra = 0.12;
+  explosion(doradas[i].X, doradas[i].Y, 45, [SPR.oro, SPR.rosa]);
+  setTimeout(() => abrirCarta(CARTAS[i].titulo, CARTAS[i].texto), 250);
+  if (nueva) setTimeout(() => aviso(`Carta ${leidas.size} de ${CARTAS.length} ✦`), 600);
+}
+function cerrarCarta() {
+  if (letter.classList.contains('hidden')) return;
+  clearInterval(escribiendo);
+  letter.classList.remove('abierta');
+  setTimeout(() => letter.classList.add('hidden'), 450);
+  if (leidas.size === CARTAS.length && !finalMostrado && CONFIG.cartaFinal) {
+    finalMostrado = true; guardar('universo_final', true);
+    setTimeout(() => {
+      latidoExtra = 0.25;
+      explosion(W / 2, H / 2, 140, [SPR.rosa, SPR.oro, SPR.lila], { vmax: 9 });
+      explosion(W / 2, H / 2, 30, [SPR.rosa], { corazones: true, vmin: 2, vmax: 8, tmin: 4, tmax: 10, subir: 1 });
+      abrirCarta(CONFIG.cartaFinal.titulo, CONFIG.cartaFinal.texto);
+    }, 1000);
+  }
+}
+
+lTexto.addEventListener('click', () => {
+  if (!lTexto.classList.contains('escribiendo')) return;
+  clearInterval(escribiendo);
+  lTexto.textContent = lTexto.dataset.completo;
+  lTexto.classList.remove('escribiendo');
+});
+$('close').addEventListener('click', cerrarCarta);
+letter.addEventListener('click', e => { if (e.target === letter) cerrarCarta(); });
+addEventListener('keydown', e => { if (e.key === 'Escape') cerrarCarta(); });
+
+$('help').addEventListener('click', () => {
+  const dias = textoDias();
+  abrirCarta('Cómo explorar', [
+    '✦ Arrastra el corazón para girarlo.',
+    '✦ Toca las estrellas doradas para leer tus cartas.',
+    '✦ Toca dos veces el corazón y mira lo que pasa.',
+    '✦ Si ves una estrella fugaz, tócala y pide un deseo.',
+    '✦ Cuando aparezca una constelación, tócala para descubrir su nombre. Algunas son muy difíciles de ver…',
+    '',
+    `Cartas leídas: ${leidas.size} de ${CARTAS.length}`,
+    `Constelaciones descubiertas: ${descubiertas.size} de 7`,
+    dias ? dias : '',
+  ].join('\n'), { escribir: false, ayuda: true });
+});
+
+</script>
+</body>
+</html>
